@@ -17,7 +17,7 @@
 
 [配图]
 
-#### **Scheme.Ⅰ - The Chatroom**
+#### **Scheme.Ⅰ - CHArena -> The Chatroom**
 
 
 #### **Scheme.Ⅱ - The Real World of Functional AI**
