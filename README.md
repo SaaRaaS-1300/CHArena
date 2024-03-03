@@ -15,7 +15,7 @@
 
 ### **Project Scheme**
 
-![alt text](src/img/main-page-1.png)
+![alt text](src/img/main-page-1.jpg)
 
 #### **Scheme.Ⅰ - CHArena -> The Chatroom ✅**
 
