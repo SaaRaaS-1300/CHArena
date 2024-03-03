@@ -15,12 +15,15 @@
 
 ### **Project Scheme**
 
-[配图]
+![alt text](src/img/main-page-1.png)
 
 #### **Scheme.Ⅰ - CHArena -> The Chatroom ✅**
 
 
 #### **Scheme.Ⅱ - The Real World of Functional AI Robots**
+
++ **仓库链接 - 暂无**
++ **主要计划 - 暂无**
 
 ## 🛡️**How to install ?**
 
