@@ -20,7 +20,7 @@
 #### **Scheme.Ⅰ - CHArena -> The Chatroom**
 
 
-#### **Scheme.Ⅱ - The Real World of Functional AI**
+#### **Scheme.Ⅱ - The Real World of Functional AI Robots**
 
 ## 🛡️**How to install ?**
 
