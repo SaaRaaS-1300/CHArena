@@ -7,7 +7,7 @@ import json
 # Lagent 相关包
 from lagent.schema import ActionReturn, ActionStatusCode, AgentReturn, AgentStatusCode, ModelStatusCode
 from lagent.agents.base_agent import BaseAgent
-from lagent.llms import BaseAPIModel, BaseModel
+from lagent.llms import BaseModel
 from lagent.actions import ActionExecutor
 
 # 设定参数
