@@ -19,6 +19,7 @@
 
 #### **Scheme.Ⅰ - CHArena -> The Chatroom ✅**
 
++ **Personas: 基于 Lagent 的角色扮演模型构建方法**
 
 #### **Scheme.Ⅱ - The Real World of Functional AI Robots**
 
