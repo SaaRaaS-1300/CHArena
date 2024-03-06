@@ -7,7 +7,7 @@ from copy import copy
 import warnings
 import torch
 
-# 参数设定
+# warnings
 warnings.warn("It is not recommended to use RoleplayerModel directly without the meta template.", UserWarning)
 warnings.filterwarnings("ignore")
 
