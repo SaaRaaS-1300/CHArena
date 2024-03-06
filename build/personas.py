@@ -8,7 +8,7 @@ import warnings
 import torch
 
 # 参数设定
-warnings.warn("It is not recommended to use RoleplayerModel directly without the meta_template.", UserWarning)
+warnings.warn("It is not recommended to use RoleplayerModel directly without the meta template.", UserWarning)
 warnings.filterwarnings("ignore")
 
 
