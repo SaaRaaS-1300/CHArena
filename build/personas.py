@@ -1,21 +1,20 @@
-# 调用其他基础库
+# import Xxx
+from lagent.llms.base_llm import BaseModel, LMTemplateParser
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from typing import Dict, List, Optional, Tuple, Union
 from warnings import warn
 from copy import copy
+import warnings
 import torch
 
-# 调用 Lagent 及相关库
-from lagent.llms.base_llm import BaseModel
-
-
-
-
+# 参数设定
+warnings.warn("It is not recommended to use RoleplayerModel directly without the meta_template.", UserWarning)
+warnings.filterwarnings("ignore")
 
 
 class RoleplayerModel(BaseModel):
     """
-    Roleplayer for InternLM2-Chat model
+    Roleplayer for base model
 
     Args:
         path (str): The path to the model.
@@ -31,33 +30,48 @@ class RoleplayerModel(BaseModel):
     def __init__(
             self,
             path: str,
-            max_new_tokens: int = 512,
             top_p: float = 0.8,
             top_k: float = None,
             temperature: float = 0.8,
-            repetition_penalty: float = 1.0,
+            max_new_tokens: int = 512,
+            template_parser: 'LMTemplateParser' = LMTemplateParser,
+            meta_template: Optional[List[Dict]] = None,
+            repetition_penalty: float = 1.0001,
             stop_words: Union[List[str], str] = None
     ):
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
-        self.model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True, low_cpu_mem_usage=True, torch_dtype=torch.bfloat16).cuda()
+        # model and tokenizer
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            path, 
+            trust_remote_code=True
+        )
+        self.model = AutoModelForCausalLM.from_pretrained(
+            path, 
+            trust_remote_code=True, 
+            low_cpu_mem_usage=True, 
+            device_map="auto",
+            torch_dtype=torch.bfloat16
+        ).cuda()
         self.model = self.model.eval()
+
+        # meta template
+        self.template_parser = template_parser(meta_template)
+        self.eos_token_id = None
+        if meta_template and 'eos_token_id' in meta_template:
+            self.eos_token_id = meta_template['eos_token_id']
         
         # stop words
         if isinstance(stop_words, str):
             stop_words = [stop_words]
         self.gen_params = dict(
-            max_new_tokens=max_new_tokens,
+            do_sample=True,
             top_p=top_p,
             top_k=top_k,
             temperature=temperature,
+            max_new_tokens=max_new_tokens,
             repetition_penalty=repetition_penalty,
             stop_words=stop_words)
 
-    def generate(
-        self, 
-        inputs: Union[str, List[str]], 
-        **gen_params
-    ) -> str:
+    def generate(self, inputs: Union[str, List[str]], **gen_params) -> str:
         """
         Generate results given a str (or list of) inputs.
 
@@ -68,8 +82,38 @@ class RoleplayerModel(BaseModel):
         Returns:
             Union[str, List[str]]: A (list of) generated strings.
         """
+        if isinstance(inputs, str):
+            inputs = [inputs]
+        else:
+            # If inputs is not a string or a list, raise an error
+            if not all(isinstance(input, str) for input in inputs):
+                raise ValueError("All inputs must be strings.")
+    
+        # Update the generation parameters with any provided in gen_params
+        gen_params = {**self.gen_params, **gen_params}
+    
+        # Encode the inputs and generate outputs
+        encoded_inputs = self.tokenizer(
+            inputs,
+            return_tensors="pt",
+            truncation=True,
+            max_length=gen_params.get("max_length"),
+        )
         
-        
-        
-
-
+        encoded_inputs = {k: v.to("cuda") for k, v in encoded_inputs.items()}
+        outputs = self.model.generate(
+            **encoded_inputs, 
+            **gen_params
+        )
+    
+        # Decode the outputs and return them
+        decoded_outputs = []
+        for output in outputs:
+            decoded_output = self.tokenizer.decode(output, skip_special_tokens=True)
+            decoded_outputs.append(decoded_output)
+    
+        # If only one input was provided, return a single string. Otherwise, return a list of strings.
+        if len(decoded_outputs) == 1:
+            return decoded_outputs[0]
+        else:
+            return decoded_outputs
