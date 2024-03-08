@@ -8,7 +8,7 @@ import warnings
 import torch
 
 # warnings
-warnings.warn("It is not recommended to use RoleplayerModel directly without the meta template.", UserWarning)
+warnings.warn("It is not recommended to use RoleplayerModel directly without the meta template.")
 warnings.filterwarnings("ignore")
 
 
@@ -31,12 +31,13 @@ class RoleplayerModel(BaseModel):
             self,
             path: str,
             top_p: float = 0.8,
-            top_k: float = None,
+            top_k: int = 1,
+            do_sample: bool = True,
             temperature: float = 0.8,
             max_new_tokens: int = 512,
             template_parser: 'LMTemplateParser' = LMTemplateParser,
             meta_template: Optional[List[Dict]] = None,
-            repetition_penalty: float = 1.0001,
+            repetition_penalty: float = 1.001,
             stop_words: Union[List[str], str] = None
     ):
         # model and tokenizer
@@ -52,6 +53,7 @@ class RoleplayerModel(BaseModel):
             torch_dtype=torch.bfloat16
         ).cuda()
         self.model = self.model.eval()
+        self.do_sample = do_sample
 
         # meta template
         self.template_parser = template_parser(meta_template)
@@ -63,13 +65,14 @@ class RoleplayerModel(BaseModel):
         if isinstance(stop_words, str):
             stop_words = [stop_words]
         self.gen_params = dict(
-            do_sample=True,
             top_p=top_p,
             top_k=top_k,
+            do_sample=self.do_sample,
             temperature=temperature,
             max_new_tokens=max_new_tokens,
             repetition_penalty=repetition_penalty,
-            stop_words=stop_words)
+            stop_words=stop_words
+        )
 
     def generate(self, inputs: Union[str, List[str]], **gen_params) -> str:
         """
@@ -109,7 +112,10 @@ class RoleplayerModel(BaseModel):
         # Decode the outputs and return them
         decoded_outputs = []
         for output in outputs:
-            decoded_output = self.tokenizer.decode(output, skip_special_tokens=True)
+            decoded_output = self.tokenizer.decode(
+                output, 
+                skip_special_tokens=False
+            )
             decoded_outputs.append(decoded_output)
     
         # If only one input was provided, return a single string. Otherwise, return a list of strings.
