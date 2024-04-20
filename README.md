@@ -3,7 +3,7 @@
 
 <div align="center">
   
-  <img src="src/img/charena-logo.gif" width="51.75%" height="51.75%">
+  <img src="src/img/charena-logo.gif" width="51.5%" height="51.5%">
 </div>
 
 <div align="center">
