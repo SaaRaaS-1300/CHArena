@@ -1,7 +1,11 @@
 # **CHArena - The Battlefield of AI Talker**
 > **"What is tragedy? Tragedy is the conflict of good." -- Hegel**
 
-[这里会添加Logo]
+<div align="center">
+
+![Logo-Gif](src/img/charena-logo.gif)
+</div>
+
 <div align="center">
 
 ![Static Badge](https://img.shields.io/badge/AI%20Combat-ef4464?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/Chatroom-fad259?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/Finetuning-d22e8d?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/Evaluation-03dee0?style=for-the-badge)
