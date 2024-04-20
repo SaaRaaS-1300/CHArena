@@ -2,8 +2,8 @@
 > **"What is tragedy? Tragedy is the conflict of good." -- Hegel**
 
 <div align="center">
-
-![Logo-Gif](src/img/charena-logo.gif)
+  
+  <img src="src/img/charena-logo.gif" width="42.285%" height="42.285%">
 </div>
 
 <div align="center">
@@ -19,7 +19,7 @@
 
 ### **Project Scheme**
 
-![alt text](src/img/main-page-1.jpg)
+![Pic_Set](src/img/main-page-1.jpg)
 
 #### **Scheme.Ⅰ - CHArena -> The Chatroom ✅**
 
