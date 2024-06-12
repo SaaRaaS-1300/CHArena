@@ -5,7 +5,6 @@ import logging
 from queue import Queue
 
 
-
 # 群聊 - 客户端
 class ClientBot:
     """
