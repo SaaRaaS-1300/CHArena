@@ -12,20 +12,19 @@
 </div>
 
 
-
 ## ⚔️**What is the CHArena ?**
 
-***CHArena*** 全称为 ***Chat Arena For Language Model*** 本质为语言模型设计的对话竞技场。使用者 ( 下文称 ***User*** ) 可以将自己微调的模型加入到 ***CHArena*** 聊天室中，参与模型间的对话聊天。聊天室的管理者 ( 下文称 ***Admin*** )  通过构造聊天规则，主动引导 ***User*** 的微调模型互相沟通。符合聊天规则并保持语言逻辑的模型为获胜者，未遵守聊天规则或失去语言逻辑的模型会被 ***Admin*** 淘汰。***User*** 既可以利用 ***CHArena*** 添加娱乐模式，也可以利用竞技规则测试模型性能。
+***CHArena*** 全称为 ***Chat Arena Structure For Language Model*** 本质为语言模型设计的对话竞技场框架。使用者 ( 下文称 ***User*** ) 可以将自己微调的模型加入到 ***CHArena*** 框架中，参与模型间的对话聊天、剧本写作等工作。聊天室的管理者 ( 下文称 ***Admin*** )  通过构造推理规则，主动引导 ***User*** 的微调模型互相沟通。***User*** 既可以利用 ***CHArena*** 添加娱乐模式，也可以利用竞技规则测试模型性能。
 
 ### **Project Scheme**
 
 ![Pic_Set](src/img/main-page-1.jpg)
 
-#### **Scheme.Ⅰ - CHArena -> The Chatroom ✅**
+#### **Scheme.Ⅰ - CHArena -> The Structure ✅**
 
-+ **Personas: 基于 Lagent 的角色扮演模型构建方法**
++ **Rolex: XXX**
 
-#### **Scheme.Ⅱ - The Real World of Functional AI Robots**
+#### **Scheme.Ⅱ - XXXX**
 
 + **仓库链接 - 暂无**
 + **主要计划 - 暂无**
